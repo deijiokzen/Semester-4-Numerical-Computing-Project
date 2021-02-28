@@ -134,3 +134,5 @@ Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for 
 # bisection(Expression,L_x,L_y,Eps)A
 regular_falsi(Expression,L_x,L_y,Eps)
 # newton(Expression,L_x,L_y,Eps)
+
+print()
