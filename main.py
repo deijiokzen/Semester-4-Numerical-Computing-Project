@@ -1,6 +1,6 @@
 from mpmath import *
 from sympy import *
-import sympy
+import sympy, numpy as np, math
 from sympy.parsing.sympy_parser import (parse_expr, standard_transformations, implicit_multiplication_application)
 
 def func_bisector(expression, limit_val):
@@ -19,7 +19,12 @@ def func_bisector(expression, limit_val):
 
 def func_newton(expression, limit_val):
     expression = expression.translate({ord(c): "**" for c in "^"})
-    Function = parse_expr(expression, local_dict={"log": lambda x: sympy.log(x, 10)},
+    Function = parse_expr(expression, local_dict={"log": lambda x: sympy.log(x, 10),
+                                                  "cos": lambda x: sympy.cos(sympy.deg(x)),
+                                                  "sin": lambda x: sympy.sin(sympy.deg(x)),
+                                                  "tan": lambda x: sympy.tan(sympy.deg(x))
+
+                                                  },
                           transformations=(standard_transformations + (implicit_multiplication_application,)))
     e = symbols('e')
     x = symbols('x')
@@ -40,14 +45,15 @@ def func_newton(expression, limit_val):
 def newton(Expression, L_x, L_y, Eps):
     IVR = abs(func_bisector(Expression, L_x) * func_bisector(Expression, L_y))
     a = 0
-    header = ["P", "F(C)", "ERROR"]
+    header = ["P", "F(P)", "ERROR"]
     matrix = []
     P0 = (L_x + L_y) / 2
 
     while (1):
 
         # print(c,"-",a)
-        matrix.append([P0, func_bisector(Expression, P0), abs(P0 - a)])
+        # matrix.append([P0, func_bisector(Expression, P0), abs(P0 - a)])
+        print([P0, func_bisector(Expression, P0), abs(P0 - a)])
 
         if abs(P0 - a) < Eps or IVR == 0:
             break
@@ -62,6 +68,8 @@ def newton(Expression, L_x, L_y, Eps):
         print(row_format.format("", *row))
     print("Your final value of P is: ", P0)
 
+
+
 def bisection(Expression, L_x, L_y, Eps):
     IVR = abs(func_bisector(Expression, L_x) * func_bisector(Expression, L_y))
     a = 0
@@ -71,9 +79,13 @@ def bisection(Expression, L_x, L_y, Eps):
 
         c = (L_x + L_y) / 2
         # print(c,"-",a)
-        matrix.append([L_x, L_y, c, func_bisector(Expression,c), abs(c-a)])
-
+        # matrix.extend([[L_x, L_y, c, func_bisector(Expression,c), abs(c-a)]])
+        print([L_x, L_y, c, func_bisector(Expression,c), abs(c-a)])
         if abs(c-a) < Eps or IVR == 0:
+            if abs(c - a) < Eps:
+                print("The error value has reached!\n")
+            else:
+                print("IVR has reached!\n")
             break
         elif func_bisector(Expression,c) < 0:
             if(func_bisector(Expression,L_x) < 0):
@@ -126,11 +138,24 @@ def regular_falsi(Expression, L_x, L_y, Eps):
         print(row_format.format("", *row))
     print("Your final value of c is: ", c)
 
-Expression = input("Enter the Function on Which Bisection will be Applied:")
-L_x = float(input("Enter value for Lower Limit:"))
-L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
-Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for c in "^"})).evalf())
+def func_convergence(expression, val):
 
-# bisection(Expression,L_x,L_y,Eps)A
-regular_falsi(Expression,L_x,L_y,Eps)
-# newton(Expression,L_x,L_y,Eps)
+    a=val
+    while(1):
+     a=func_bisector(expression, a)
+     print("Error = ", a-func_bisector(expression, a))
+     print(a)
+     input()
+
+
+# Expression = input("Enter the Function on Which Bisection will be Applied:")
+# L_x = float(input("Enter value for Lower Limit:"))
+# L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
+# Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for c in "^"})).evalf())
+#
+# bisection(Expression,L_x,L_y,Eps)
+# regular_falsi(Expression,L_x,L_y,Eps)
+newton("x - cos x",0,math.pi/2,10**-4)
+
+# func_convergence("3/(x(x^(2)-3))", 1)
+# func_convergence("(1/2)(x+3/x)", 1.5)
