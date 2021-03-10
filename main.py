@@ -167,7 +167,7 @@ def func_convergence(expression, val):
 #
 # bisection(Expression,L_x,L_y,Eps)
 # regular_falsi(Expression,L_x,L_y,Eps)
-# newton("x - cos x",0,math.pi/2,10**-4)
-secant("3x * e^(x)", 1,2,10**-5)
+# newton("3x - e^(x)",1,2,10**-5)
+secant("2x + 3cos x - e^x", 0,1,10**-5)
 # func_convergence("3/(x(x^(2)-3))", 1)
 # func_convergence("(1/2)(x+3/x)", 1.5)
