@@ -138,6 +138,18 @@ def regular_falsi(Expression, L_x, L_y, Eps):
         print(row_format.format("", *row))
     print("Your final value of c is: ", c)
 
+def secant(Expression, L_x, L_y, Eps):
+    while (1):
+        c = L_y - ((func_bisector(Expression, L_y)*(L_y-L_x))/(func_bisector(Expression, L_y)-func_bisector(Expression, L_x)))
+        print([L_x, L_y, c, abs(c - L_y)])
+        if abs(c - L_y) < Eps:
+            break
+        L_x=L_y
+        L_y=c
+
+
+
+
 def func_convergence(expression, val):
 
     a=val
@@ -155,7 +167,7 @@ def func_convergence(expression, val):
 #
 # bisection(Expression,L_x,L_y,Eps)
 # regular_falsi(Expression,L_x,L_y,Eps)
-newton("x - cos x",0,math.pi/2,10**-4)
-
+# newton("x - cos x",0,math.pi/2,10**-4)
+secant("3x * e^(x)", 1,2,10**-5)
 # func_convergence("3/(x(x^(2)-3))", 1)
 # func_convergence("(1/2)(x+3/x)", 1.5)
