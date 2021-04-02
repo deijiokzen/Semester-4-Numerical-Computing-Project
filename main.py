@@ -48,7 +48,7 @@ def newton(Expression, L_x, L_y, Eps, Round_Val):
         Round_Val = 12
     IVR = abs(func(Expression, L_x) * func(Expression, L_y))
     a = 0
-    header = ["N","P", "F(P)", "ERROR"]
+    header = ["N","P", "F(P)", "|ERROR < 10^"+str(Round_Val)+"|"]
     matrix = []
     P0 = (L_x + L_y) / 2
     i=-1
@@ -78,7 +78,7 @@ def bisection(Expression, L_x, L_y, Eps, Round_Val):
         Round_Val = 12
     IVR = abs(func(Expression, L_x) * func(Expression, L_y))
     a = 0
-    header=["N","A", "B", "C=(A-B)/2", "F(C)", "ERROR"]
+    header=["N","A", "B", "C=(A-B)/2", "F(C)", "|ERROR < 10^"+str(Round_Val)+"|"]
     matrix=[]
     i=-1
     while(1):
@@ -119,7 +119,7 @@ def regular_falsi(Expression, L_x, L_y, Eps,Round_Val):
         Round_Val = 12
     IVR = abs(func(Expression, L_x) * func(Expression, L_y))
     a = 0
-    header = ["N","A", "B", "C=[A(F(B)-B(F(A))]/", "F(C)", "ERROR"]
+    header = ["N","A", "B", "C=[A(F(B)-B(F(A))]/", "F(C)", "|ERROR < 10^"+str(Round_Val)+"|"]
     headerv2 = [" "," "," ","[F(B)-F(A)]","",""]
     matrix = []
     i=-1
@@ -153,16 +153,28 @@ def regular_falsi(Expression, L_x, L_y, Eps,Round_Val):
         print(row_format.format("", *row))
     print("Your final value of c is: ", c)
 
-def secant(Expression, L_x, L_y, Eps):
+def secant(Expression, L_x, L_y, Eps, Round_Val):
+
+    i=1
+    header=["N", "P(N-1)", "P(N-2)", "P(N)", "|ERROR < 10^"+str(Round_Val)+"|"]
+    matrix=[]
     while (1):
+        i+=1
+
         c = L_y - ((func(Expression, L_y)*(L_y-L_x))/(func(Expression, L_y)-func(Expression, L_x)))
-        print([L_x, L_y, c, abs(c - L_y)])
-        if abs(c - L_y) < Eps:
+        list=[round(i,Round_Val),round(L_x,Round_Val), round(L_y,Round_Val), round(c,Round_Val), round(abs(c - L_y),Round_Val)]
+        matrix.extend([list])
+        if abs(c - L_y) < Eps or i==200:
+            print("Error Tolerance Reached!")
             break
         L_x=L_y
         L_y=c
 
-
+    row_format = "{:>25}" * (len(header) + 1)
+    print(row_format.format("", *header))
+    for row in matrix:
+        print(row_format.format("", *row))
+    print("Your final value of c is: ", c, ", While your rounded off value is: ", round(c, Round_Val))
 
 
 def fixedpoint(expression, val):
@@ -179,10 +191,10 @@ def fixedpoint(expression, val):
 # L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
 # Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for c in "^"})).evalf())
 #
-# bisection("x * cos(x) - 2x^2 +3x -1",1.2,1.3,10**-5,6)
-# regular_falsi("2x*cos(2x)-(x-2)^2",2,3,10**-5,6)
-# newton("ln(x-1)+cos(x-1)",1.3,2,10**-5,6)
-# secant("ln(x-1) + cos(x-1)", 1.3,2,10**-5)
+bisection("x * cos(x) - 2x^2 +3x -1",1.2,1.3,10**-5,6)
+regular_falsi("2x*cos(2x)-(x-2)^2",2,3,10**-5,6)
+newton("ln(x-1)+cos(x-1)",1.3,2,10**-5,6)
+secant("ln(x-1)+cos(x-1)", 1.3,2,10**-5,6)
 # func_convergence("3/(x(x^(2)-3))", 1)
 # func_convergence("(1/2)(x+3/x)", 1.5)
 
