@@ -114,16 +114,22 @@ def bisection(Expression, L_x, L_y, Eps, Round_Val):
         print(row_format.format("", *row))
     print("Your final value of c is: ", c, ", While your rounded off value is: ", round(c,Round_Val))
 
-def regular_falsi(Expression, L_x, L_y, Eps):
+def regular_falsi(Expression, L_x, L_y, Eps,Round_Val):
+    if Round_Val > 12:
+        Round_Val = 12
     IVR = abs(func(Expression, L_x) * func(Expression, L_y))
     a = 0
-    header = ["A", "B", "C=[A(F(B)-B(F(A))]/[F(B)-F(A)]", "F(C)", "ERROR"]
+    header = ["N","A", "B", "C=[A(F(B)-B(F(A))]/", "F(C)", "ERROR"]
+    headerv2 = [" "," "," ","[F(B)-F(A)]","",""]
     matrix = []
+    i=-1
     while (1):
-
+        i+=1
         c = (L_x * func(Expression,L_y) - L_y * func(Expression,(L_x))) / (func(Expression,L_y)-func(Expression,L_x))
         # print(c,"-",a)
-        print([L_x, L_y, c, func(Expression, c), abs(c - a)])
+        list=[round(i,Round_Val),round(L_x,Round_Val), round(L_y,Round_Val), round(c,Round_Val), round(func(Expression, c),Round_Val), round(abs(c - a),Round_Val)]
+        matrix.extend([list])
+
 
         if abs(c - a) < Eps or IVR == 0:
             break
@@ -140,9 +146,10 @@ def regular_falsi(Expression, L_x, L_y, Eps):
                 L_y = c
         a = c
 
-    row_format = "{:>40}" * (len(header) + 1)
+    row_format = "{:>25}" * (len(header) + 1)
     print(row_format.format("", *header))
-    for team, row in zip(header, matrix):
+    print(row_format.format("", *headerv2))
+    for row in matrix:
         print(row_format.format("", *row))
     print("Your final value of c is: ", c)
 
@@ -173,8 +180,8 @@ def fixedpoint(expression, val):
 # Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for c in "^"})).evalf())
 #
 # bisection("x * cos(x) - 2x^2 +3x -1",1.2,1.3,10**-5,6)
-# regular_falsi("x-0.8-0.2sin x",0,math.pi/2,10**-4)
-newton("ln(x-1)+cos(x-1)",1.3,2,10**-5,6)
+# regular_falsi("2x*cos(2x)-(x-2)^2",2,3,10**-5,6)
+# newton("ln(x-1)+cos(x-1)",1.3,2,10**-5,6)
 # secant("ln(x-1) + cos(x-1)", 1.3,2,10**-5)
 # func_convergence("3/(x(x^(2)-3))", 1)
 # func_convergence("(1/2)(x+3/x)", 1.5)
