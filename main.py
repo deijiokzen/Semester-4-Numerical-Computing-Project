@@ -133,7 +133,7 @@ def regular_falsi(Expression, L_x, L_y, Eps_,Round_Val):
         list=[round(i,Round_Val),round(L_x,Round_Val), round(L_y,Round_Val), round(c,Round_Val), round(func(Expression, c),Round_Val), round(abs(c - a),Round_Val)]
         matrix.extend([list])
 
-
+        #
         if abs(c - a) < Eps or IVR == 0:
             break
         elif func(Expression, c) < 0:
