@@ -2,6 +2,7 @@ from mpmath import *
 from sympy import *
 import sympy, numpy as np, math
 from sympy.parsing.sympy_parser import (parse_expr, standard_transformations, implicit_multiplication_application)
+import matplotlib.pyplot as plt
 
 def func(expression, limit_val):
     expression = expression.translate({ord(c): "**" for c in "^"})
@@ -71,6 +72,7 @@ def newton(Expression, L_x, L_y, Eps_, Round_Val):
     for row in matrix:
         print(row_format.format("", *row))
     print("Your final value of P is: ", P0, ", While your rounded off value is: ", round(P0,Round_Val))
+    return i
 
 
 
@@ -115,6 +117,7 @@ def bisection(Expression, L_x, L_y, Eps_, Round_Val):
     for row in matrix:
         print(row_format.format("", *row))
     print("Your final value of c is: ", c, ", While your rounded off value is: ", round(c,Round_Val))
+    return i
 
 def regular_falsi(Expression, L_x, L_y, Eps_,Round_Val):
     Eps=10**Eps_
@@ -133,7 +136,7 @@ def regular_falsi(Expression, L_x, L_y, Eps_,Round_Val):
         list=[round(i,Round_Val),round(L_x,Round_Val), round(L_y,Round_Val), round(c,Round_Val), round(func(Expression, c),Round_Val), round(abs(c - a),Round_Val)]
         matrix.extend([list])
 
-        #
+
         if abs(c - a) < Eps or IVR == 0:
             break
         elif func(Expression, c) < 0:
@@ -155,11 +158,12 @@ def regular_falsi(Expression, L_x, L_y, Eps_,Round_Val):
     for row in matrix:
         print(row_format.format("", *row))
     print("Your final value of c is: ", c)
+    return i
 
 def secant(Expression, L_x, L_y, Eps_, Round_Val):
     Eps=10**Eps_
     i=1
-    header=["N", "P(N-1)", "P(N-2)", "P(N)", "|ERROR < 10^"+str(Eps_)+"|"]
+    header=["N", "(N-1)", "(N-2)", "P(N)", "|ERROR < 10^"+str(Eps_)+"|"]
     matrix=[]
     while (1):
         i+=1
@@ -178,26 +182,84 @@ def secant(Expression, L_x, L_y, Eps_, Round_Val):
     for row in matrix:
         print(row_format.format("", *row))
     print("Your final value of c is: ", c, ", While your rounded off value is: ", round(c, Round_Val))
+    return i
 
-
-def fixedpoint(expression, val):
+def fixedpoint(expression, val, Round_Val):
+    if(Round_Val>12):
+        Round_Val=12
     a=val
+    i=0
+    iter=0
+    header=["N", "P", "G(P)", "DIVERGENCE FROM LAST VALUE"]
+    matrix=[]
+    divergence=0
     while(1):
-     a=func(expression, a)
-     print("Error = ", a-func(expression, a))
-     print(a)
-     input()
+        iter+=1
+        if(a-func(expression,a) > abs(divergence)):
+            i+=1
+        else:
+            i=0
+        if(i==5):
+            print("Function Diverging!")
+            exit(0)
+        if(iter==200):
+            print("Function Not Converging Within 200 Iterations!")
+            exit(0)
+        list=[iter, a, func(expression,a), a-func(expression,a)]
+        print(list)
+        matrix.extend([list])
+        if(a == func(expression,a)):
+            print("Function Value Repeated, Answer Reached!", a ,"&", func(expression,a))
+            break
+        divergence=a-func(expression,a)
+        a=func(expression,a)
 
+
+    row_format = "{:>30}" * (len(header) + 1)
+    print(row_format.format("", *header))
+    for row in matrix:
+        print(row_format.format("", *row))
+    print("Your final value is: ", a, ", While your rounded off value is: ", round(a, Round_Val))
+
+
+def plotter(Expression, L_x, L_y, Eps_, Round_Val):
+    a=bisection(Expression, L_x, L_y, Eps_, Round_Val)
+    b=regular_falsi(Expression, L_x, L_y, Eps_, Round_Val)
+    c=newton(Expression, L_x, L_y, Eps_, Round_Val)
+    d=secant(Expression, L_x, L_y, Eps_, Round_Val)
+    left = [1, 2, 3, 4]
+
+    # heights of bars
+    height = [a,b,c,d]
+
+    # labels for bars
+    tick_label = ['Bisector', 'Regular Falsi', 'Newton Raphson', 'Secant']
+
+    # plotting a bar chart
+    plt.bar(left, height, tick_label=tick_label,
+            width=0.8, color=['red', 'blue'])
+
+    # naming the x-axis
+    plt.xlabel('Chapter 2 Functions Tested')
+    # naming the y-axis
+    plt.ylabel('Number of Iterations')
+    # plot title
+    plt.title('Analytical Viewing')
+
+    # function to show the plot
+    plt.show()
 
 # Expression = input("Enter the Function on Which Bisection will be Applied:")
 # L_x = float(input("Enter value for Lower Limit:"))
 # L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
 # Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for c in "^"})).evalf())
 #
-bisection("x * cos(x) - 2x^2 +3x -1",1.2,1.3,-5,6)
-regular_falsi("2x*cos(2x)-(x-2)^2",2,3,-5,6)
-newton("ln(x-1)+cos(x-1)",1.3,2,-5,6)
-secant("ln(x-1)+cos(x-1)", 1.3,2,-5,6)
-# func_convergence("3/(x(x^(2)-3))", 1)
+# bisection("x * cos(x) - 2x^2 +3x -1",1.2,1.3,-5,6)
+# regular_falsi("2x*cos(2x)-(x-2)^2",2,3,-5,6)
+# newton("ln(x-1)+cos(x-1)",1.3,2,-5,6)
+# secant("ln(x-1)+cos(x-1)", 1.3,2,-5,6)
+plotter("ln(x-1)+cos(x-1)",1.3,2,-5,6)
+# fixedpoint("x-x^3-4x^2+10", 1,2)
+# fixedpoint("(1/2)*(10-x^3)^(1/2)", 1,2)
 # func_convergence("(1/2)(x+3/x)", 1.5)
 
