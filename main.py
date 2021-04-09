@@ -258,7 +258,7 @@ def plotter(Expression, L_x, L_y, Eps_, Round_Val):
 # regular_falsi("2x*cos(2x)-(x-2)^2",2,3,-5,6)
 # newton("ln(x-1)+cos(x-1)",1.3,2,-5,6)
 # secant("ln(x-1)+cos(x-1)", 1.3,2,-5,6)
-plotter("ln(x-1)+cos(x-1)",1.3,2,-5,6)
+# plotter("ln(x-1)+cos(x-1)",1.3,2,-5,6)
 # fixedpoint("x-x^3-4x^2+10", 1,2)
 # fixedpoint("(1/2)*(10-x^3)^(1/2)", 1,2)
 # func_convergence("(1/2)(x+3/x)", 1.5)
