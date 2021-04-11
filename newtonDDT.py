@@ -1,5 +1,4 @@
 import os
-from tabulate import tabulate
 from colorama import *
 
 def pos(x, y):
