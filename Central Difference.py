@@ -42,18 +42,22 @@ def stirling_table(n,round_off):
     #     xtable.append(float(input()))
     # x=float(input("\nEnter value for x on which you would like to work on:"))
     #
-    # h=xtable[1]-xtable[0]
-    # p=(x-xtable[math.floor(len(xtable)/2)])/h
+    #
     # for i in range(0, n, 1):
     #     print("\nEnter value for f(x",i,"):")
     #     table[0].append(float(input()))
     x=1.5
     xtable = [1,1.3,1.6,1.9,2.1]
     table=[[0.7651977,0.6200860,0.4554022,0.2818186,0.1103623]]
+
+    if(len(xtable)%2==0):
+        print("To acquire function’s values near the middle of a table where central difference interpolation"
+               " formulas are applicable in which our new method is very suitable. This method employs"
+                " differences lying as nearly as possible on a horizontal line through y0 in a diagonal difference"
+                " table. The values you input MUST be odd in number for the center difference to work.")
+        return 0
     h = xtable[1] - xtable[0]
-    p=(x-xtable[math.floor(len(xtable)/2)])/h
-
-
+    p = (x - xtable[math.floor(len(xtable) / 2)]) / h
     for i in range(1, n, 1):
         table.append([])
         for j in range(0, len(table[i-1])-1, 1):
@@ -70,6 +74,6 @@ def stirling_table(n,round_off):
     return round(final_stir, round_off)
 
 
-print(stirling_table(5,7))
+print("Your answer for stirling is :",stirling_table(5,7))
 
 # print(1.49182 + stirling([0.27042,0.33030,0.05988], 0, 0.15) + stirling([0.01086,0.01324,0.00238], 1, 0.15)   )
