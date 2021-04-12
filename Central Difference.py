@@ -69,12 +69,10 @@ def stirling_table(n,round_off):
     print(final_stir, "+")
     i=1
     j=0
-    for j in range(0, int(n/2), 1):
-        print(i)
+    for i in range(1, n-1, 2):
         matrix.append([round(table[i][len(table[i])//2-1],round_off),round(table[i][len(table[i])//2],round_off), round(table[i+1][math.floor(len(table[i])//2)-1],round_off)])
         final_stir+=stirling([round(table[i][len(table[i])//2-1],round_off),round(table[i][len(table[i])//2],round_off), round(table[i+1][math.floor(len(table[i])//2)-1],round_off)], j, p)
         j+=1
-        i+=2
         matrix=[]
 
     return round(final_stir, round_off)
