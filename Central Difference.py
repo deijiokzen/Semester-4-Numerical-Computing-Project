@@ -37,10 +37,10 @@ def stirling(values, iterative_value, p):
 
 def stirling_table(n,round_off):
     if (n % 2 == 0):
-        print("To acquire function’s values near the middle of a table where central difference interpolation"
-              " formulas are applicable in which our new method is very suitable. This method employs"
-              " differences lying as nearly as possible on a horizontal line through y0 in a diagonal difference"
-              " table. The values you input MUST be odd in number for the center difference to work.")
+        print("To acquire function’s values near the middle of a table where central difference interpolation\n"
+              "formulas are applicable in which our new method is very suitable. This method employs\n"
+              "differences lying as nearly as possible on a horizontal line through y0 in a diagonal difference\n"
+              "table. The values you input MUST be odd in number for the center difference to work.\n")
         return 0
 
     # x=1.5
@@ -117,4 +117,3 @@ b=int(input("Enter Range For Central Difference:"))
 c=int(input("Round-off to how many digits ? :"))
 print("\nYour answer for stirling is :",stirling_table(b,c))
 
-# print(1.49182 + stirling([0.27042,0.33030,0.05988], 0, 0.15) + stirling([0.01086,0.01324,0.00238], 1, 0.15)   )
