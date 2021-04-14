@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 # if (iterative_value == 0):
 #     return values
@@ -35,6 +36,12 @@ def stirling(values, iterative_value, p):
     return temp + temp2
 
 def stirling_table(n,round_off):
+    if (n % 2 == 0):
+        print("To acquire function’s values near the middle of a table where central difference interpolation"
+              " formulas are applicable in which our new method is very suitable. This method employs"
+              " differences lying as nearly as possible on a horizontal line through y0 in a diagonal difference"
+              " table. The values you input MUST be odd in number for the center difference to work.")
+        return 0
     # xtable=[]
     # table=[[]]
     # for i in range(0, n, 1):
@@ -52,21 +59,32 @@ def stirling_table(n,round_off):
     x = 0.5437
     xtable = [0.51,0.52,0.53,0.54,0.55,0.56,0.57]
     table=[[0.5292437, 0.5378987, 0.5464641, 0.5549392, 0.563323, 0.5716157, 0.57981]]
-    if(len(xtable)%2==0):
-        print("To acquire function’s values near the middle of a table where central difference interpolation"
-               " formulas are applicable in which our new method is very suitable. This method employs"
-                " differences lying as nearly as possible on a horizontal line through y0 in a diagonal difference"
-                " table. The values you input MUST be odd in number for the center difference to work.")
-        return 0
+
+
+
     h = xtable[1] - xtable[0]
     p = (x - xtable[math.floor(len(xtable) / 2)]) / h
     for i in range(1, n, 1):
         table.append([])
         for j in range(0, len(table[i-1])-1, 1):
-            table[i].append(table[i-1][j+1]-table[i-1][j])
+            table[i].append(round(table[i-1][j+1]-table[i-1][j],round_off))
+
+    for i in range(0, len(table), 1):
+        if i==0:
+            lst=[item[0] for item in table]
+        else:
+            lst = [item[i] for item in table[:-i]]
+        frmt="{:>25}" * len(lst)
+        print(frmt.format(*lst))
+
+
+
+
+
+
     matrix=[]
     final_stir= table[0][math.floor(len(xtable)/2)]
-    print(final_stir, "+")
+    print("\n\n\n\n\n",final_stir, "+")
     i=1
     j=0
     for i in range(1, n-1, 2):
