@@ -32,7 +32,7 @@ def stirling(values, iterative_value, p):
     temp2/=factorial(2*(iterative_value+1))
     temp*=(values[0] + values[1])/2
     temp2*=values[2]
-    print(temp, "+", temp2)
+    print(" + "+str(temp), "+", temp2, end='')
     return temp + temp2
 
 def stirling_table(n,round_off):
@@ -42,25 +42,29 @@ def stirling_table(n,round_off):
               " differences lying as nearly as possible on a horizontal line through y0 in a diagonal difference"
               " table. The values you input MUST be odd in number for the center difference to work.")
         return 0
-    # xtable=[]
-    # table=[[]]
-    # for i in range(0, n, 1):
-    #     print("\nEnter value for x",i,":")
-    #     xtable.append(float(input()))
-    # x=float(input("\nEnter value for x on which you would like to work on:"))
-    #
-    #
-    # for i in range(0, n, 1):
-    #     print("\nEnter value for f(x",i,"):")
-    #     table[0].append(float(input()))
+
     # x=1.5
     # xtable = [1,1.3,1.6,1.9,2.1]
     # table=[[0.7651977,0.6200860,0.4554022,0.2818186,0.1103623]]
-    x = 0.5437
-    xtable = [0.51,0.52,0.53,0.54,0.55,0.56,0.57]
-    table=[[0.5292437, 0.5378987, 0.5464641, 0.5549392, 0.563323, 0.5716157, 0.57981]]
+    # x = 0.5437
+    # xtable = [0.51,0.52,0.53,0.54,0.55,0.56,0.57]
+    # table=[[0.5292437, 0.5378987, 0.5464641, 0.5549392, 0.563323, 0.5716157, 0.57981]]
+    # x=28
+    # xtable=[20,25,30,35,40]
+    # table=[[49225,48316,47236,45926,44306]]
 
+    #------------Comment this part below and uncomment one of the above for experiment----------#
+    xtable = []
+    table = [[]]
+    for i in range(0, n, 1):
+        print("\nEnter value for x" + str(i) + ":")
+        xtable.append(float(input()))
+    x = float(input("\nEnter value for x on which you would like to work on:"))
+    #------------Comment this part above and uncomment one of the above for experiment----------#
 
+    for i in range(0, n, 1):
+        print("\nEnter value for f(x" + str(i) + "):")
+        table[0].append(float(input()))
 
     h = xtable[1] - xtable[0]
     p = (x - xtable[math.floor(len(xtable) / 2)]) / h
@@ -69,11 +73,25 @@ def stirling_table(n,round_off):
         for j in range(0, len(table[i-1])-1, 1):
             table[i].append(round(table[i-1][j+1]-table[i-1][j],round_off))
 
+    def superscript(n):
+        return "".join(["⁰¹²³⁴⁵⁶⁷⁸⁹"[ord(c) - ord('0')] for c in str(n)])
+
+    header=["x", "y"]
+    for i in range(0, len(xtable)-1, 1):
+        if i==0:
+            header.append("Δy")
+        else:
+            header.append("Δ" + superscript(i+1) + "y")
+
+
+    frmt = "{:>25}" * len(header)
+    print(frmt.format(*header))
     for i in range(0, len(table), 1):
         if i==0:
             lst=[item[0] for item in table]
         else:
             lst = [item[i] for item in table[:-i]]
+        lst.insert(0,xtable[i])
         frmt="{:>25}" * len(lst)
         print(frmt.format(*lst))
 
@@ -84,7 +102,7 @@ def stirling_table(n,round_off):
 
     matrix=[]
     final_stir= table[0][math.floor(len(xtable)/2)]
-    print("\n\n\n\n\n",final_stir, "+")
+    print("\n\n\n\n\n"+ str(final_stir), end='')
     i=1
     j=0
     for i in range(1, n-1, 2):
@@ -95,7 +113,8 @@ def stirling_table(n,round_off):
 
     return round(final_stir, round_off)
 
-
-print("Your answer for stirling is :",stirling_table(7,10))
+b=int(input("Enter Range For Central Difference:"))
+c=int(input("Round-off to how many digits ? :"))
+print("\nYour answer for stirling is :",stirling_table(b,c))
 
 # print(1.49182 + stirling([0.27042,0.33030,0.05988], 0, 0.15) + stirling([0.01086,0.01324,0.00238], 1, 0.15)   )
