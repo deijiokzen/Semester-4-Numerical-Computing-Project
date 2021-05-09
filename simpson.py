@@ -28,7 +28,7 @@ def enter_data():
         if choice == 1:
             result = simpson_one_third(integrate, num, spacing, points)
             break
-        if choice == 2:
+        elif choice == 2:
             result = simpson_three_eights(integrate, num, spacing, points)
             break
         else:
