@@ -1,6 +1,6 @@
 from main import *
 
-def func(*param):
+def func2(*param):
     param=list(param)
     param[0]=param[0].translate({ord(c): "**" for c in "^"})
     Function = parse_expr( param[0],  local_dict={"log": lambda x: sympy.log(x, 10)}, transformations=(standard_transformations + (implicit_multiplication_application,)))
@@ -9,7 +9,7 @@ def func(*param):
     symbol_vals = {}
     all_symbols = [str(x) for x in Function.atoms(Symbol)]
     if (len(all_symbols) != 2):
-        print("Error, more than one variable detected!")
+        print("Error, more than two variable detected!")
         exit(0)
     for i, item in enumerate(all_symbols):
         key = all_symbols[i]
