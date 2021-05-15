@@ -1,6 +1,5 @@
-from main import *
+from Functions import *
 import os
-
 
 def lagrange():
     n = int(input("Enter number of points (min = 2): "))
@@ -134,5 +133,4 @@ def NewtonFixedPoint():
 
 
 
-lagrange()
 # NewtonFixedPoint()

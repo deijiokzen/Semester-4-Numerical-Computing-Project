@@ -1,49 +1,3 @@
-from mpmath import *
-from sympy import *
-import os
-import sympy, numpy as np, math
-from sympy.parsing.sympy_parser import (parse_expr, standard_transformations, implicit_multiplication_application)
-import matplotlib.pyplot as plt
-
-def func(expression, limit_val):
-    expression = expression.translate({ord(c): "**" for c in "^"})
-    Function = parse_expr(expression,  local_dict={"log": lambda x: sympy.log(x, 10)}, transformations=(standard_transformations + (implicit_multiplication_application,)))
-    e = symbols('e')
-    Function = Function.subs(e, exp(1))
-    symbol_vals = {}
-    all_symbols = [str(x) for x in Function.atoms(Symbol)]
-    if (len(all_symbols) != 1):
-        print("Error, more than one variable detected!")
-        exit(0)
-    for i, item in enumerate(all_symbols):
-        key = all_symbols[i]
-        value = limit_val
-        symbol_vals[key] = value
-    Function = Function.subs(symbol_vals)
-    return Function.evalf()
-
-def func_differential(expression, limit_val):
-    expression = expression.translate({ord(c): "**" for c in "^"})
-    Function = parse_expr(expression, local_dict={"log": lambda x: sympy.log(x, 10)},
-                          transformations=(standard_transformations + (implicit_multiplication_application,)))
-    e = symbols('e')
-    x = symbols('x')
-    Function = Function.subs(e, exp(1))
-    symbol_vals = {}
-    all_symbols = [str(x) for x in Function.atoms(Symbol)]
-    if (len(all_symbols) != 1):
-        print("Error, more than one variable detected!")
-        exit(0)
-    key = all_symbols[0]
-    symbol_vals[key] = x
-    Function = Function.subs(symbol_vals)
-    Function=diff(Function,x)
-
-    key = x
-    value = limit_val
-    symbol_vals[key] = value
-    Function = Function.subs(symbol_vals)
-    return Function.evalf()
 
 def newton(Expression, L_x, L_y, Eps_, Round_Val):
     Eps=10**Eps_
@@ -221,9 +175,6 @@ def Chapter2Func(choice):
         L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
         Eps = float(sympify(input("Input tolerance value: (Input only the value of n in 10^-n)").translate({ord(c): "**" for c in "^"})).evalf())
         RoundValue = int(input("Input Number of decimal places you want:"))
-    else:
-        Expression = input("Enter the Function Expression on which Convergence will be Applied:")
-        Limit= float(sympify(input("Enter value to be passed into Function Convergence:").translate({ord(c): "**" for c in "^"})).evalf())
     if(choice == 1):
         bisection(Expression, L_x, L_y, Eps, RoundValue)
     elif choice ==2:
@@ -234,6 +185,8 @@ def Chapter2Func(choice):
         newton(Expression, L_x, L_y, Eps, RoundValue)
     elif choice ==5:
         plotter(Expression, L_x, L_y, Eps, RoundValue)
+    elif choice ==6:
+        NewtonFixedPoint()
 
 
 def print_menu():
@@ -249,7 +202,7 @@ def print_menu():
     print(73 * "-")
 
 
-def menu():
+def menu_chapter2():
     loop = True
 
 
@@ -265,13 +218,13 @@ def menu():
         else:
             input("Wrong menu selection. Enter any key to try again..")
             loop = True
+    return 0
 
 
 
 
 
-
-menu()
+menu_chapter2()
 
 
 
