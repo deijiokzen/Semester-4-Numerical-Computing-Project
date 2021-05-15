@@ -1,3 +1,5 @@
+from Lagrange import *
+import matplotlib.pyplot as plt
 
 def newton(Expression, L_x, L_y, Eps_, Round_Val):
     Eps=10**Eps_
