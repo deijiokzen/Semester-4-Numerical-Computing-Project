@@ -33,6 +33,7 @@ def printDiffTable(points, dds, n):
 def Diff():
     while True:
         while True:
+            print("\b"+30 * "-", "Chapter 3- Divided Differences", 30 * "-")
             choice = int(input("\n1. Forward Difference\n2. Backward Difference\n3. Central Difference\n4. Return to Previous Menu"))
             if choice == 1 or choice == 2:
                 divSimpChoice = int(input("\n1. Divided Difference\n2. Simple Difference\n"))
@@ -58,6 +59,7 @@ def Diff():
                 if(choice == 3):
                     central(n)
                     break
+                break
         if(choice == 3):
             continue
         if n < 2:
