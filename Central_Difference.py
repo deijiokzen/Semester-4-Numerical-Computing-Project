@@ -113,7 +113,7 @@ def stirling_table(n,round_off):
 
     return round(final_stir, round_off)
 
-b=int(input("Enter Range For Central Difference:"))
-c=int(input("Round-off to how many digits ? :"))
-print("\nYour answer for stirling is :",stirling_table(b,c))
+# b=int(input("Enter Range For Central Difference:"))
+# c=int(input("Round-off to how many digits ? :"))
+# print("\nYour answer for stirling is :",stirling_table(b,c))
 

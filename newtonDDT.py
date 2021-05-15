@@ -1,4 +1,5 @@
 import os
+from Central_Difference import *
 from colorama import *
 
 def pos(x, y):
@@ -31,58 +32,64 @@ def printDiffTable(points, dds, n):
 
 def Diff():
     while True:
-        choice = int(input("\n1. Forward Difference\n2. Backward Difference\n3. Central Difference\n"))
-        if choice == 1 or choice == 2:
-            divSimpChoice = int(input("\n1. Divided Difference\n2. Simple Difference\n"))
+        while True:
+            choice = int(input("\n1. Forward Difference\n2. Backward Difference\n3. Central Difference\n4. Return to Previous Menu"))
+            if choice == 1 or choice == 2:
+                divSimpChoice = int(input("\n1. Divided Difference\n2. Simple Difference\n"))
 
-            if divSimpChoice != 1 and divSimpChoice != 2:
+                if divSimpChoice != 1 and divSimpChoice != 2:
+                    print("Invalid Input, try again!")
+                    continue
+
+            if choice == 4 :
+                return 0
+            if choice < 1 and choice >4:
                 print("Invalid Input, try again!")
                 continue
 
-        if choice != 1 and choice != 2 and choice != 3:
-            print("Invalid Input, try again!")
-            continue
 
-        break
-
-    while True:
-        n = int(input("Enter number of points (min = 2): "))
-        if choice == 3 and n%2 == 0:
-            print("Error, central difference needs odd number of points. Try again!")
-        else:
             break
 
-    if n < 2:
-        print("Points can not be less than 2, number of points set to 2 (minimum).")
-        n = 2
+        while True:
+            n = int(input("Enter number of points (min = 2): "))
+            if choice == 3 and n%2 == 0:
+                print("Error, central difference needs odd number of points. Try again!")
+            else:
+                if(choice == 3):
+                    central(n)
+                    break
+        if(choice == 3):
+            continue
+        if n < 2:
+            print("Points can not be less than 2, number of points set to 2 (minimum).")
+            n = 2
 
-    fix = int(input("\nEnter fix: "))
+        fix = int(input("\nEnter fix: "))
 
-    points = []
-    functionVals = []
+        points = []
+        functionVals = []
 
-    points.append(float(input("Enter x0: ")))
-    h = float(input("Enter spacing (rest of the points will be automatically entered using this spacing):\nh = "))
+        points.append(float(input("Enter x0: ")))
+        h = float(input("Enter spacing (rest of the points will be automatically entered using this spacing):\nh = "))
 
-    for i in range(0, n-1):
-        points.append(points[i]+h)
+        for i in range(0, n-1):
+            points.append(points[i]+h)
 
-    for i in range(0, n):
-        functionVals.append(float(input("Enter f(x" + str(i) + "): ")))
+        for i in range(0, n):
+            functionVals.append(float(input("Enter f(x" + str(i) + "): ")))
 
-    x = round(float(input("\nEnter the value for which you want the approximation: x = ")), fix)
+        x = round(float(input("\nEnter the value for which you want the approximation: x = ")), fix)
 
-    if choice == 1:
-        answer = forward(n, h, x, fix, points, functionVals, divSimpChoice)
-    elif choice == 2:
-        answer = backward(n, h, x, fix, points, functionVals, divSimpChoice)
-    elif choice == 3:
-        answer = central(n, h, x, fix, points, functionVals)
+        if choice == 1:
+            answer = forward(n, h, x, fix, points, functionVals, divSimpChoice)
+        elif choice == 2:
+            answer = backward(n, h, x, fix, points, functionVals, divSimpChoice)
 
-    print("\nf(" + str(x) + ") = " + str(round(answer, fix)))
+        print("\nf(" + str(x) + ") = " + str(round(answer, fix)))
 
-def central(n, h, x, fix, points, functionVals):
-
+def central(b):
+    c = int(input("Round-off to how many digits ? :"))
+    print("\nYour answer for stirling is :", stirling_table(b, c))
     return 1
 
 def forward(n, h, x, fix, points, functionVals, divSimpChoice):
