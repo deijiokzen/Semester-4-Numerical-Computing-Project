@@ -1,5 +1,6 @@
 from mpmath import *
 from sympy import *
+import os
 import sympy, numpy as np, math
 from sympy.parsing.sympy_parser import (parse_expr, standard_transformations, implicit_multiplication_application)
 import matplotlib.pyplot as plt
@@ -184,42 +185,6 @@ def secant(Expression, L_x, L_y, Eps_, Round_Val):
     print("Your final value of c is: ", c, ", While your rounded off value is: ", round(c, Round_Val))
     return i
 
-def fixedpoint(expression, val, Round_Val):
-    if(Round_Val>12):
-        Round_Val=12
-    a=val
-    i=0
-    iter=0
-    header=["N", "P", "G(P)", "DIVERGENCE FROM LAST VALUE"]
-    matrix=[]
-    divergence=0
-    while(1):
-        iter+=1
-        if(a-func(expression,a) > abs(divergence)):
-            i+=1
-        else:
-            i=0
-        if(i==5):
-            print("Function Diverging!")
-            exit(0)
-        if(iter==200):
-            print("Function Not Converging Within 200 Iterations!")
-            exit(0)
-        list=[iter, a, func(expression,a), a-func(expression,a)]
-        print(list)
-        matrix.extend([list])
-        if(a == func(expression,a)):
-            print("Function Value Repeated, Answer Reached!", a ,"&", func(expression,a))
-            break
-        divergence=a-func(expression,a)
-        a=func(expression,a)
-
-
-    row_format = "{:>30}" * (len(header) + 1)
-    print(row_format.format("", *header))
-    for row in matrix:
-        print(row_format.format("", *row))
-    print("Your final value is: ", a, ", While your rounded off value is: ", round(a, Round_Val))
 
 
 def plotter(Expression, L_x, L_y, Eps_, Round_Val):
@@ -249,11 +214,67 @@ def plotter(Expression, L_x, L_y, Eps_, Round_Val):
     # function to show the plot
     plt.show()
 
-# Expression = input("Enter the Function on Which Bisection will be Applied:")
-# L_x = float(input("Enter value for Lower Limit:"))
-# L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
-# Eps = float(sympify(input("Input tolerance value:").translate({ord(c): "**" for c in "^"})).evalf())
-#
+def Chapter2Func(choice):
+    if (choice >=1 and choice <=5):
+        Expression = input("Enter the Function Expression:")
+        L_x = float(sympify(input("Enter value for lower Limit:").translate({ord(c): "**" for c in "^"})).evalf())
+        L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
+        Eps = float(sympify(input("Input tolerance value: (Input only the value of n in 10^-n)").translate({ord(c): "**" for c in "^"})).evalf())
+        RoundValue = int(input("Input Number of decimal places you want:"))
+    else:
+        Expression = input("Enter the Function Expression on which Convergence will be Applied:")
+        Limit= float(sympify(input("Enter value to be passed into Function Convergence:").translate({ord(c): "**" for c in "^"})).evalf())
+    if(choice == 1):
+        bisection(Expression, L_x, L_y, Eps, RoundValue)
+    elif choice ==2:
+        regular_falsi(Expression, L_x, L_y, Eps, RoundValue)
+    elif choice ==3:
+        secant(Expression, L_x, L_y, Eps, RoundValue)
+    elif choice ==4:
+        newton(Expression, L_x, L_y, Eps, RoundValue)
+    elif choice ==5:
+        plotter(Expression, L_x, L_y, Eps, RoundValue)
+
+
+def print_menu():
+    os.system("cls")
+    print(30 * "-", "Chapter 2", 30 * "-")
+    print("1. Bisection Method ")
+    print("2. Regular Falsi Method ")
+    print("3. Secant Method ")
+    print("4. Newton Method")
+    print("5. All above methods used + Plotted on Graph ")
+    print("6. Fixed Point")
+    print("7. Return to previous screen")
+    print(73 * "-")
+
+
+def menu():
+    loop = True
+
+
+    while loop:          # While loop which will keep going until loop = False
+        print_menu()    # Displays menu
+        choice = int(input("Enter your choice [1-6]: "))
+
+        if choice >= 1 and choice <=6:
+            Chapter2Func(choice)
+            loop = True
+        elif choice==7:
+            loop = False
+        else:
+            input("Wrong menu selection. Enter any key to try again..")
+            loop = True
+
+
+
+
+
+
+menu()
+
+
+
 # bisection("x * cos(x) - 2x^2 +3x -1",1.2,1.3,-5,6)
 # regular_falsi("2x*cos(2x)-(x-2)^2",2,3,-5,6)
 # newton("ln(x-1)+cos(x-1)",1.3,2,-5,6)
