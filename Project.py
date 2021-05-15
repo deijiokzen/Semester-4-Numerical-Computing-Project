@@ -13,8 +13,9 @@ def ProjectMenu():
         print("5. Exit")
 
 
-    choice = int(input("Enter your choice 1-5"))
     while True:
+        project_print_menu()
+        choice = int(input("Enter your choice [1-5]:"))
         if choice==1 :
             menu_chapter2()
         elif choice==2:
@@ -26,3 +27,4 @@ def ProjectMenu():
                 Diff()
 
 
+ProjectMenu()

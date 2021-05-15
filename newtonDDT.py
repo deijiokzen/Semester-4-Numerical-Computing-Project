@@ -247,5 +247,5 @@ def ddt():
 
     print("\nf(" + str(x) + ") = " + str(round(answer,fix)))
 
-os.system("cls")
-Diff()
+# os.system("cls")
+# Diff()

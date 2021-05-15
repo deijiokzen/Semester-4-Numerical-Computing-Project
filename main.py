@@ -205,28 +205,25 @@ def print_menu():
 
 
 def menu_chapter2():
-    loop = True
 
 
-    while loop:          # While loop which will keep going until loop = False
+    while True:          # While loop which will keep going until loop = False
         print_menu()    # Displays menu
         choice = int(input("Enter your choice [1-6]: "))
 
         if choice >= 1 and choice <=6:
             Chapter2Func(choice)
-            loop = True
         elif choice==7:
-            loop = False
+            break
         else:
             input("Wrong menu selection. Enter any key to try again..")
-            loop = True
     return 0
 
 
 
 
 
-menu_chapter2()
+# menu_chapter2()
 
 
 
