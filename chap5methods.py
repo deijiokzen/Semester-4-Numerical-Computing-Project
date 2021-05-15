@@ -1,8 +1,8 @@
 from Functions import *
 
-def enterdata():
+def enterdata_():
     Expression = input(
-        "Enter the Function to Integrate using Modified Euler Method : ")
+        "Enter the Function to Integrate Initial-Value Problem With : ")
     h = float(input("Enter h : "))
     n = bound1 = float(input("From a = "))
     bound2 = float(input("To b = "))
@@ -161,4 +161,4 @@ def Rk4(Expression, h, n, bound1, bound2, y0, fix):
 # ModifiedEuler()
 # Huen()
 # Euler()
-enterdata()
+# enterdata_()

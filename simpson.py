@@ -1,4 +1,4 @@
-from main import func
+from Functions import func
 
 def enter_data():
     integrate = input("Integrate function: ")
