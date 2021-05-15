@@ -8,6 +8,7 @@ def lagrange():
         print("Points can not be less than, number of points set to 2")
         n = 2
 
+    fix = int(input("Enter rounding value digit : "))
     choice = str(
         input("Do you want to specify the degree of Lagrange Interpolation [y/n] : "))
     if choice == 'y':
@@ -57,7 +58,9 @@ def lagrange():
         for i in range(start, end+1):
             if(i != k):
                 individual *= (points[n] - points[i])/(points[k]-points[i])
+                individual = round(individual, fix)
         value += individual*func(Expression, points[k])
+        value = round(value, fix)
         individual = float(1)
 
     print("value of f({}) = {}".format(points[n], value))
@@ -131,5 +134,5 @@ def NewtonFixedPoint():
 
 
 
-# lagrange()
-NewtonFixedPoint()
+lagrange()
+# NewtonFixedPoint()
