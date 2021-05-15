@@ -1,6 +1,4 @@
-from main import *
-from func2 import *
-import os
+from Functions import *
 
 def enterdata():
     Expression = input(
