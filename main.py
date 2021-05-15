@@ -193,7 +193,7 @@ def Chapter2Func(choice):
 
 def print_menu():
     os.system("cls")
-    print(30 * "-", "Chapter 2", 30 * "-")
+    print(30 * "-", "Chapter#2-Solutions of Equations in One Variable", 30 * "-")
     print("1. Bisection Method ")
     print("2. Regular Falsi Method ")
     print("3. Secant Method ")
