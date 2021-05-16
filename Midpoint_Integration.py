@@ -14,9 +14,9 @@ def Midpoint(*param):
         print("More variables passed in Midpoint Integral Function than allowed!")
         return
     sum=0
-    for j in range(0, int(n/2)+2,2):
-        print("Value of f(x"+str(j)+")=", func(expression, a+(j+1)*h))
-        sum+=func(expression, a+(j+1)*h)
+    for j in range(0, int(n/2),1):
+        print("Value of f(x"+str(2*j)+")=", func(expression, a+(2*(j)+1)*h))
+        sum+=func(expression, a+(2*(j)+1)*h)
     final_calc=2*h*sum
     print("Your MidPoint Integral Result Is: ", final_calc)
 
@@ -29,7 +29,7 @@ def MidpointValues():
     Midpoint(Exp,L_x,L_y,n)
 
 
-MidpointValues()
+
 
 
 
