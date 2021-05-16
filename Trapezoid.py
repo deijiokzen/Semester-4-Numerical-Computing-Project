@@ -1,10 +1,7 @@
-from main import *
-import os
-
+from Functions import *
 
 def Trap():
-    Expression = input(
-        "Enter the Function to Integrate using Trapezoid method : ")
+    Expression = input("Enter the Function to Integrate using Trapezoid method : ")
     bound1 = float(sympify(input("From a = ").translate({ord(c): "**" for c in "^"})).evalf())
     bound2 = float(sympify(input("To b = ").translate({ord(c): "**" for c in "^"})).evalf())
     fix = int(input("Enter the rounding point digits : "))

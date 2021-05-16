@@ -24,11 +24,14 @@ def MidpointValues():
     Exp=input("Enter The Expression you want To Evaluate with Midpoint Integration:")
     L_x = float(sympify(input("Enter value for lower Limit:").translate({ord(c): "**" for c in "^"})).evalf())
     L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
-    n=int(sympify(input("Enter value n:").translate({ord(c): "**" for c in "^"})).evalf())
+    n=-1
+    while(n<0):
+        n=int(sympify(input("Enter value for n(should be greater than 0):").translate({ord(c): "**" for c in "^"})).evalf())
+
     Midpoint(Exp,L_x,L_y,n)
 
 
-
+MidpointValues()
 
 
 

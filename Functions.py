@@ -6,7 +6,10 @@ from sympy.parsing.sympy_parser import (parse_expr, standard_transformations, im
 
 def func(expression, limit_val):
     expression = expression.translate({ord(c): "**" for c in "^"})
-    Function = parse_expr(expression,  local_dict={"log": lambda x: sympy.log(x, 10)}, transformations=(standard_transformations + (implicit_multiplication_application,)))
+    Function = parse_expr(expression,  local_dict={"log": lambda x: sympy.log(x, 10),
+                                                   "tan": lambda x: sympy.tan(x),
+                                                   "sin": lambda x: sympy.sin(x),
+                                                   "cos": lambda x: sympy.cos(x)}, transformations=(standard_transformations + (implicit_multiplication_application,)))
     e = symbols('e')
     Function = Function.subs(e, exp(1))
     symbol_vals = {}
