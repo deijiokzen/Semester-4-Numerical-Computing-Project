@@ -114,7 +114,7 @@ def regular_falsi(Expression, L_x, L_y, Eps_,Round_Val):
     print(row_format.format("", *headerv2))
     for row in matrix:
         print(row_format.format("", *row))
-    print("Your final value of c is: ", c)
+    print("Your final value of c is: ", c,"While your rounded off value is:", round(c,Round_Val))
     return i
 
 def secant(Expression, L_x, L_y, Eps_, Round_Val):
@@ -175,7 +175,7 @@ def Chapter2Func(choice):
         Expression = input("Enter the Function Expression:")
         L_x = float(sympify(input("Enter value for lower Limit:").translate({ord(c): "**" for c in "^"})).evalf())
         L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
-        Eps = float(sympify(input("Input tolerance value: (Input only the value of n in 10^-n)").translate({ord(c): "**" for c in "^"})).evalf())
+        Eps = float(sympify(input("Input tolerance value (Input only the value of n in 10^n):").translate({ord(c): "**" for c in "^"})).evalf())
         RoundValue = int(input("Input Number of decimal places you want:"))
     if(choice == 1):
         bisection(Expression, L_x, L_y, Eps, RoundValue)

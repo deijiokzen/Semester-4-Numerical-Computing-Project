@@ -24,7 +24,7 @@ def ProjectMenu():
         elif choice==2:
             while True:
                 print(30 * "-", "Chapter#3-Interpolation and Polynomial Approximation", 30 * "-")
-                choice_2=int(input("1. Lagrange\n2. Divided Differences\n3. Previous Menu"))
+                choice_2=int(input("1. Lagrange\n2. Divided Differences\n3. Previous Menu\nEnter your choice[1-3]:"))
                 if choice_2==1:
                     lagrange()
                 elif choice_2==2:
@@ -37,7 +37,7 @@ def ProjectMenu():
             while True:
                 print(30 * "-", "Chapter#4-Numerical Differentiation and Integration", 30 * "-")
                 print()
-                choice_2=int(input("Numerical Differentiation:\n1. Three-Point / Five-Point Method\nNumerical Integration:\n2. Trapezoid\n3. Simpsons\n4. Midpoint Integration\n5. Previous Menu"))
+                choice_2=int(input("Numerical Differentiation:\n1. Three-Point / Five-Point Method\nNumerical Integration:\n2. Trapezoid\n3. Simpsons\n4. Midpoint Integration\n5. Previous Menu\nEnter your choice [1-5]:"))
                 if choice_2==1:
                     enter_points()
                 elif choice_2==2:
