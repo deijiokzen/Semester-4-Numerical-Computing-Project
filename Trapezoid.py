@@ -5,8 +5,8 @@ import os
 def Trap():
     Expression = input(
         "Enter the Function to Integrate using Trapezoid method : ")
-    bound1 = float(input("From a = "))
-    bound2 = float(input("To b = "))
+    bound1 = float(sympify(input("From a = ").translate({ord(c): "**" for c in "^"})).evalf())
+    bound2 = float(sympify(input("To b = ").translate({ord(c): "**" for c in "^"})).evalf())
     fix = int(input("Enter the rounding point digits : "))
 
     while(1):

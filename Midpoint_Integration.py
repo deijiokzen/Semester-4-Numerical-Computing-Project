@@ -1,5 +1,4 @@
-from Functions import func
-from sympy import *
+from Functions import *
 
 def Midpoint(*param):
     list(param)
