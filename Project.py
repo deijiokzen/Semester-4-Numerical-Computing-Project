@@ -4,6 +4,7 @@ from simpson import *
 from Trapezoid import *
 from MidEndPoint import *
 from chap5methods import *
+from Midpoint_Integration import *
 def ProjectMenu():
     def project_print_menu():
         os.system("cls")
@@ -36,7 +37,7 @@ def ProjectMenu():
             while True:
                 print(30 * "-", "Chapter#4-Numerical Differentiation and Integration", 30 * "-")
                 print()
-                choice_2=int(input("Numerical Differentiation:\n1. Three-Point / Five-Point Method\nNumerical Integration:\n2. Trapezoid\n3. Simpsons\n4. Previous Menu"))
+                choice_2=int(input("Numerical Differentiation:\n1. Three-Point / Five-Point Method\nNumerical Integration:\n2. Trapezoid\n3. Simpsons\n4. Midpoint Integration\n5. Previous Menu"))
                 if choice_2==1:
                     enter_points()
                 elif choice_2==2:
@@ -44,6 +45,8 @@ def ProjectMenu():
                 elif choice_2==3:
                     enter_data()
                 elif choice_2==4:
+                    MidpointValues()
+                elif choice_2==5:
                     break
                 else:
                     continue

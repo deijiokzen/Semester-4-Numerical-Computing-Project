@@ -30,8 +30,8 @@ def MidpointValues():
 
     Midpoint(Exp,L_x,L_y,n)
 
-
-MidpointValues()
+if __name__== "__main__":
+    MidpointValues()
 
 
 
