@@ -8,11 +8,14 @@ def Midpoint(*param):
         a=param[1]
         b=param[2]
         h=(param[2]-param[1])/(param[3]+2)
+        print("Value of h is=",h)
         n=param[3]+2
     else:
         print("More variables passed in Midpoint Integral Function than allowed!")
         return
-    for j in range(0, n/2):
+    sum=0
+    for j in range(0, int(n/2)+2,2):
+        print("Value of f(x"+str(j)+")=", func(expression, a+(j+1)*h))
         sum+=func(expression, a+(j+1)*h)
     final_calc=2*h*sum
     print("Your MidPoint Integral Result Is: ", final_calc)
@@ -20,13 +23,13 @@ def Midpoint(*param):
     return
 def MidpointValues():
     Exp=input("Enter The Expression you want To Evaluate with Midpoint Integration:")
-    L_x = int(sympify(input("Enter value for lower Limit:").translate({ord(c): "**" for c in "^"})).evalf())
-    L_y = int(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
+    L_x = float(sympify(input("Enter value for lower Limit:").translate({ord(c): "**" for c in "^"})).evalf())
+    L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
     n=int(sympify(input("Enter value n:").translate({ord(c): "**" for c in "^"})).evalf())
     Midpoint(Exp,L_x,L_y,n)
 
 
-
+MidpointValues()
 
 
 
