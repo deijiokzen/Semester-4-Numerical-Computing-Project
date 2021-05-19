@@ -1,7 +1,7 @@
 import os
 from Central_Difference import *
 from colorama import *
-
+from Functions import *
 def pos(x, y):
     return ("\033[%d;%dH" % (y, x)) 
 
@@ -80,7 +80,7 @@ def Diff():
         for i in range(0, n):
             functionVals.append(float(input("Enter f(x" + str(i) + "): ")))
 
-        x = round(float(input("\nEnter the value for which you want the approximation: x = ")), fix)
+        x = round(float(sympify(input("\nEnter the value for which you want the approximation: x = ").translate({ord(c): "**" for c in "^"})).evalf()), fix)
 
         if choice == 1:
             answer = forward(n, h, x, fix, points, functionVals, divSimpChoice)
