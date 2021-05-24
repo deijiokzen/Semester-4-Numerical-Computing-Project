@@ -19,7 +19,6 @@ def lagrange():
         degree = n-1
 
     points = []
-
     for i in range(0, n):
         points.append(float(input("Enter x" + str(i) + " : ")))
     else:
@@ -40,27 +39,48 @@ def lagrange():
         start = 0
         end = start+degree
 
-    Expression = input(
-        "Enter the Function to perform the lagrange Interpolation :")
+    fchoice = input("Do you want to solve with function [y/n]")
+    if fchoice == 'y':
+        Expression = input(
+            "Enter the Function to perform the lagrange Interpolation :")
 
-    os.system("cls")
+        os.system("cls")
 
-    # make table format here
-    print("x\t\tf(x)")
-    for j in range(0, n):
-        print("x" + str(j) + "\t\t" + str(points[j]))
+        # make table format here
+        print("x\t\tf(x)")
+        for j in range(0, n):
+            print("x" + str(j) + "\t\t" + str(points[j]))
 
-    value = float(0)
-    individual = float(1)
-
-    for k in range(start, end+1):
-        for i in range(start, end+1):
-            if(i != k):
-                individual *= (points[n] - points[i])/(points[k]-points[i])
-                individual = round(individual, fix)
-        value += individual*func(Expression, points[k])
-        value = round(value, fix)
+        value = float(0)
         individual = float(1)
+
+        for k in range(start, end+1):
+            for i in range(start, end+1):
+                if(i != k):
+                    individual *= (points[n] - points[i])/(points[k]-points[i])
+                    individual = round(individual, fix)
+            value += individual*func(Expression, points[k])
+            value = round(value, fix)
+            individual = float(1)
+
+    else:
+        print("Enter the values : ")
+        pvalues = []
+        for i in range(0, n):
+            pvalues.append(float(input("Enter f(" + str(points[i]) + ") : ")))
+
+        value = float(0)
+        individual = float(1)
+
+        for k in range(start, end+1):
+            for i in range(start, end+1):
+                if(i != k):
+                    individual *= (points[n] - points[i])/(points[k]-points[i])
+                    individual = round(individual, fix)
+            value += individual*(pvalues[k])
+            value = round(value, fix)
+            individual = float(1)
+
 
     print("value of f({}) = {}".format(points[n], value))
 
@@ -132,5 +152,5 @@ def NewtonFixedPoint():
 
 
 
-
+# lagrange()
 # NewtonFixedPoint()
