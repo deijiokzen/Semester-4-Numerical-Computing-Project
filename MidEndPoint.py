@@ -73,7 +73,7 @@ def enter_points():
         except IndexError:
             print("The value of x is out of bounds for the selected method. Select a different method and/or value of h.")
 
-    print("\nf'(" + str(x) + "): " + str(result))
+    print("\nf'(" + str(points[x]) + "): " + str(result))
 
 def three_mid_point(points, f, x, h, h_multiple):
         return (1/(2*h*h_multiple))*(f[x+h_multiple] - f[x-h_multiple])
@@ -85,7 +85,7 @@ def five_mid_point(points, f, x, h, h_multiple):
         return (1/(12*h*h_multiple))*(f[x-2*h_multiple] - 8*f[x-h_multiple] + 8*f[x+h_multiple] - f[x+2*h_multiple])
 
 def five_end_point(points, f, x, h, h_multiple):
-        return (1/(12*h*h_multiple))*(-25*f[x] + 48*f[x+h_multiple] - 36*f[x+2*h_multiple] + 16*f[x+3*h_multiple] - 3*f[x+h_multiple])
+        return (1/(12*h*h_multiple))*(-25*f[x] + 48*f[x+h_multiple] - 36*f[x+2*h_multiple] + 16*f[x+3*h_multiple] - 3*f[x+4*h_multiple])
 
 
 if __name__== "__main__":
