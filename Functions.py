@@ -22,7 +22,7 @@ def func(expression, limit_val):
         value = limit_val
         symbol_vals[key] = value
     Function = Function.subs(symbol_vals)
-    return Function.evalf()
+    return float(Function.evalf())
 
 def func_differential(expression, limit_val):
     expression = expression.translate({ord(c): "**" for c in "^"})
@@ -45,7 +45,8 @@ def func_differential(expression, limit_val):
     value = limit_val
     symbol_vals[key] = value
     Function = Function.subs(symbol_vals)
-    return Function.evalf()
+    return float(Function.evalf())
+    
 def func2(*param):
     param=list(param)
     param[0]=param[0].translate({ord(c): "**" for c in "^"})
@@ -65,4 +66,8 @@ def func2(*param):
             value = param[2]
         symbol_vals[key] = value
     Function = Function.subs(symbol_vals)
-    return Function.evalf()
+    return float(Function.evalf())
+
+if __name__== "__main__":
+    print(type(func("2x-2", 1)))
+    print(func("2x-2", 1))

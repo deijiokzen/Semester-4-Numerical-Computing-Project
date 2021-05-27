@@ -150,6 +150,8 @@ def NewtonFixedPoint():
             if solution != 0 :
                 print("The final solution  : {} at Iteration {}".format(solution, iteration))
 
+    os.system("PAUSE")
+
 
 
 # lagrange()
