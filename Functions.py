@@ -46,6 +46,7 @@ def func_differential(expression, limit_val):
     symbol_vals[key] = value
     Function = Function.subs(symbol_vals)
     return float(Function.evalf())
+    
 def func2(*param):
     param=list(param)
     param[0]=param[0].translate({ord(c): "**" for c in "^"})

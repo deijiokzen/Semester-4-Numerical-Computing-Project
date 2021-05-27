@@ -52,6 +52,7 @@ def ProjectMenu():
                     continue
         elif choice==4:
             enterdata_()
+            os.system("PAUSE")
         elif choice==5:
             break
         else:
