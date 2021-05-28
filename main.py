@@ -175,7 +175,7 @@ def Chapter2Func(choice):
         Expression = input("Enter the Function Expression:")
         L_x = float(sympify(input("Enter value for lower Limit:").translate({ord(c): "**" for c in "^"})).evalf())
         L_y = float(sympify(input("Enter value for Upper Limit:").translate({ord(c): "**" for c in "^"})).evalf())
-        Eps = float(sympify(input("Input tolerance value (Input only the value of n in 10^n):").translate({ord(c): "**" for c in "^"})).evalf())
+        Eps = float(sympify(input("Input tolerance value (Input only the value of n in 10^-n):").translate({ord(c): "**" for c in "^"})).evalf())
         RoundValue = int(input("Input Number of decimal places you want:"))
     if(choice == 1):
         bisection(Expression, L_x, L_y, Eps, RoundValue)
