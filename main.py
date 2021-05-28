@@ -192,6 +192,7 @@ def Chapter2Func(choice):
 
 
 def print_menu():
+    # os.system("PAUSE")
     os.system("cls")
     print(30 * "-", "Chapter#2-Solutions of Equations in One Variable", 30 * "-")
     print("1. Bisection Method ")
@@ -217,6 +218,8 @@ def menu_chapter2():
             break
         else:
             input("Wrong menu selection. Enter any key to try again..")
+        
+        os.system("PAUSE")
     return 0
 
 
