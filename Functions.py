@@ -60,7 +60,7 @@ def func2(*param):
         exit(0)
     for i, item in enumerate(all_symbols):
         key = all_symbols[i]
-        if(key=='x'):
+        if(key!='y'):
             value =  param[1]
         else:
             value = param[2]
