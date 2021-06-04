@@ -210,7 +210,7 @@ def menu_chapter2():
 
     while True:          # While loop which will keep going until loop = False
         print_menu()    # Displays menu
-        choice = int(input("Enter your choice [1-6]: "))
+        choice = int(input("Enter your choice [1-7]: "))
 
         if choice >= 1 and choice <=6:
             Chapter2Func(choice)
