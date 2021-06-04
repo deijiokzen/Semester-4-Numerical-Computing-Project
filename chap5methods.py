@@ -52,12 +52,12 @@ def ModifiedEuler(Expression, h, n, bound1, bound2, y0, fix, sol):
 
     if Expression.find("x") != -1:
         x = "x"
-    if Expression.find("t") != -1:
+    elif Expression.find("t") != -1:
         x = "t"
     else:
         x = "val"
 
-    header = [x, "Modified Euler", "True Value", "Abs Error"]
+    header = [x, "Modified Euler", "y("+x+")", "Abs Error"]
     row_format = "{:>15}" * (len(header) + 1)
     print(row_format.format("", *header))
     for row in matrix:
@@ -96,12 +96,12 @@ def Huen(Expression, h, n, bound1, bound2, y0, fix, sol):
 
     if Expression.find("x") != -1:
         x = "x"
-    if Expression.find("t") != -1:
+    elif Expression.find("t") != -1:
         x = "t"
     else:
         x = "val"
 
-    header = [x, "Huen", "True Value", "Error"]
+    header = [x, "Huen", "y("+x+")", "Error"]
     row_format = "{:>15}" * (len(header) + 1)
     print(row_format.format("", *header))
     for row in matrix:
@@ -135,12 +135,12 @@ def Euler(Expression, h, n, bound1, bound2, y0, fix, sol):
 
     if Expression.find("x") != -1:
         x = "x"
-    if Expression.find("t") != -1:
+    elif Expression.find("t") != -1:
         x = "t"
     else:
         x = "val"
 
-    header = [x, "Euler", "True Value", "Error"]
+    header = [x, "Euler", "y("+x+")", "Error"]
     row_format = "{:>15}" * (len(header) + 1)
     print(row_format.format("", *header))
     for row in matrix:
@@ -179,12 +179,12 @@ def Rk4(Expression, h, n, bound1, bound2, y0, fix, sol):
 
     if Expression.find("x") != -1:
         x = "x"
-    if Expression.find("t") != -1:
+    elif Expression.find("t") != -1:
         x = "t"
     else:
         x = "val"
 
-    header = [x, "RK4", "True Value", "Error"]
+    header = [x, "RK4", "y("+x+")", "Error"]
     row_format = "{:>15}" * (len(header) + 1)
     print(row_format.format("", *header))
     for row in matrix:
